@@ -6,7 +6,7 @@
 
 ---
 
-[![Live Preview](https://img.shields.io/badge/Live-Preview-blue?style=for-the-badge)](https://abdul-rahman-9.github.io/license)
+[![Live Preview](https://img.shields.io/badge/Live-Preview-blue?style=for-the-badge)](https://abdul-rahman-9.github.io/Dynamic-365-License-Management/)
 
 
 ## Features
