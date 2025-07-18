@@ -1,11 +1,13 @@
 # Dynamic-365-License-Dashboard
-
-![Dynamic 365 License Management Dashboard Screenshot](https://github.com/user-attachments/assets/f056ac00-98f2-4037-9280-7527c117c63f)
+<img width="1918" height="943" alt="image" src="https://github.com/user-attachments/assets/059b4e14-0d70-480d-a00a-88bb067c1d3a" />
 
 ## Overview
 **Dynamic 365 License Management**  is a React-based web application designed to streamline the process of registering, managing, and tracking Microsoft Dynamics 365 licenses. This project provides an intuitive user interface for license activation, CRM integration details, and notification management, ensuring smooth licensing workflows for organizations using Dynamics 365.
 
 ---
+
+[![Live Preview](https://img.shields.io/badge/Live-Preview-blue?style=for-the-badge)](https://abdul-rahman-9.github.io/license)
+
 
 ## Features
 
