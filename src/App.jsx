@@ -1,73 +1,116 @@
-import React, { useState, useEffect } from "react";
-import { BrowserRouter as Router, Routes, Route, Navigate } from "react-router-dom";
-import NavBar from "./components/NavBar";
-import Sidebar from "./components/Sidebar";
-import LicenseForm from "./components/LicenseForm";
-import SuccessModal from "./components/SuccessModal";
-import LogPage from "./components/LogPage";
+import React, { useState } from "react";
+// Layout Components
+import Navbar from "./components/layout/Navbar";
+import Sidebar from "./components/layout/Sidebar";
+// Page Components
+import Dashboard from "./components/pages/Dashboard";
+import LicenseForm from "./components/pages/LicenseForm";
+import LogPage from "./components/pages/LogPage";
+import UserManual from "./components/pages/UserManual";
+import PinnedItems from "./components/pages/PinnedItems";
+import EntityConfiguration from "./components/pages/EntityConfiguration";
+import Settings from "./components/pages/Settings";
+import Placeholder from "./components/pages/Placeholder";
+// UI Components
+import SuccessModal from "./components/ui/SuccessModal";
 
 export default function App()
 {
-  // Load logs from localStorage initially or default to empty array
-  const [logs, setLogs] = useState(() =>
-  {
-    const savedLogs = localStorage.getItem("licenseLogs");
-    return savedLogs ? JSON.parse(savedLogs) : [];
-  });
+  // Navigation State - Matches Sidebar 'name' properties exactly
+  const [activeTab, setActiveTab] = useState("Home");
 
-  const [sidebarOpen, setSidebarOpen] = useState(true);
-  const [modalOpen, setModalOpen] = useState(false);
-  const [activeSection, setActiveSection] = useState("Administration");
-  const [activeItem, setActiveItem] = useState("License Configuration");
+  // Data State
+  const [showModal, setShowModal] = useState(false);
+  const [lastEntry, setLastEntry] = useState(null);
+  const [logs, setLogs] = useState([
+    {
+      id: 1,
+      firstName: "Admin",
+      lastName: "User",
+      companyName: "CRM.io HQ",
+      email: "admin@crm.io",
+      crmUrl: "org.crm.dynamics.com",
+      organization: "Global",
+      interval: "month",
+      submittedAt: new Date().toISOString()
+    }
+  ]);
 
-  // Whenever logs change, save to localStorage
-  useEffect(() =>
+  // Logic: When License is activated
+  const handleActivation = (formData) =>
   {
-    localStorage.setItem("licenseLogs", JSON.stringify(logs));
-  }, [logs]);
-
-  const handleAddLog = (data) =>
-  {
-    setLogs((prev) => [data, ...prev]);
-    setModalOpen(true);
-    setActiveSection("Analysis");
-    setActiveItem("Logs");
+    const newLog = { ...formData, id: Date.now() };
+    setLogs([newLog, ...logs]); // Adds new data to the top of logs
+    setLastEntry(newLog);       // Sets data for the Success Modal
+    setShowModal(true);         // Triggers the popup
   };
-  const handleDeleteLog = (index) =>
-  {
-    setLogs((prevLogs) => prevLogs.filter((_, i) => i !== index));
-  };
 
+  // Logic: Page Router
+  const renderPage = () =>
+  {
+    // We wrap every page in a div with an animation class for a "smooth entry"
+    return (
+      <div className="animate-in fade-in slide-in-from-bottom-4 duration-700">
+        {(() =>
+        {
+          switch (activeTab)
+          {
+            case "Home":
+              return <Dashboard />;
+            case "License Configuration":
+              return <LicenseForm onActivate={handleActivation} />;
+            case "Logs":
+              return <LogPage logs={logs} onDelete={setLogs} />;
+            case "User Manual":
+              return <UserManual />;
+            case "Pinned":
+              return <PinnedItems />;
+            case "Entity Configuration":
+              return <EntityConfiguration />;
+            case "Settings":
+              return <Settings />;
+            case "Recent":
+              return <Placeholder title="Recent Activities" setActiveTab={setActiveTab} />;
+            default:
+              return <Dashboard />;
+          }
+        })()}
+      </div>
+    );
+  };
 
   return (
-    <Router>
-      <div className="flex flex-col h-screen">
-        <NavBar />
-        <div className="flex flex-1 overflow-hidden bg-gray-100">
-          <Sidebar
-            open={sidebarOpen}
-            setSidebarOpen={setSidebarOpen}
-            logs={logs}
-            activeSection={activeSection}
-            activeItem={activeItem}
-            setActiveSection={setActiveSection}
-            setActiveItem={setActiveItem}
-          />
+    <div className="flex h-screen w-full bg-[#f8faff] text-gray-800 font-sans overflow-hidden">
 
-          <main className="flex-1 p-6 overflow-auto">
-            <Routes>
-              <Route path="/" element={<Navigate to="/license" />} />
-              <Route path="/license" element={<LicenseForm onSubmitSuccess={handleAddLog} />} />
-              <Route path="/logs" element={<LogPage logs={logs} onDeleteLog={handleDeleteLog} />} />
-              <Route path="*" element={<div className="flex items-center justify-center h-full">
-                <span className="text-red-500 text-xl font-semibold">Page not found</span>
-              </div>} />
-            </Routes>
-          </main>
-        </div>
+      {/* 1. LEFT SIDEBAR: Fixed width, Dark Navy CRM Style */}
+      <Sidebar activeTab={activeTab} setActiveTab={setActiveTab} />
 
-        <SuccessModal open={modalOpen} onClose={() => setModalOpen(false)} />
+      {/* 2. RIGHT CONTENT AREA: Navbar + Main Scrollable Area */}
+      <div className="flex-1 flex flex-col relative overflow-hidden">
+
+        {/* TOP NAVBAR: Glassmorphism Effect */}
+        <Navbar />
+
+        {/* MAIN PAGE CONTENT */}
+        <main className="flex-1 overflow-y-auto p-4 md:p-10">
+          <div className="max-w-[1600px] mx-auto">
+            {renderPage()}
+          </div>
+        </main>
       </div>
-    </Router>
+
+      {/* 3. MODALS & OVERLAYS */}
+      {showModal && (
+        <SuccessModal
+          data={lastEntry}
+          onClose={() => setShowModal(false)}
+          onGoToLogs={() =>
+          {
+            setShowModal(false);
+            setActiveTab("Logs"); // Switches tab automatically
+          }}
+        />
+      )}
+    </div>
   );
 }
