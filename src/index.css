@@ -1,1 +1,35 @@
 @import "tailwindcss";
+
+
+@keyframes waveMove {
+    0% {
+        transform: translateX(0);
+    }
+
+    50% {
+        transform: translateX(-20px);
+    }
+
+    100% {
+        transform: translateX(0);
+    }
+}
+
+.animate-wave {
+    animation: waveMove 4s ease-in-out infinite;
+}
+
+.animate-wave-line {
+    stroke-dasharray: 1000;
+    stroke-dashoffset: 1000;
+    animation: dash 5s linear infinite, waveMove 4s ease-in-out infinite;
+}
+
+@keyframes dash {
+    to {
+        stroke-dashoffset: 0;
+    }
+}
+
+.animate-spin-slow {
+    animation: spin 3s linear infinite; }
