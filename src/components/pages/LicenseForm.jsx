@@ -19,7 +19,7 @@ export default function LicenseForm({ onActivate })
     return (
         <div className="max-w-4xl mx-auto bg-white rounded shadow-lg p-6 md:p-10 animate-in slide-in-from-bottom-5">
             <div className="flex justify-between items-center mb-10 border-b pb-6">
-                <img src={DynamicLogo} alt="Logo" className="h-16" />
+                <img src={DynamicLogo} alt="Logo" className="h-30" />
                 <div className="flex gap-3">
                     <button onClick={handleSubmit} className="bg-[#228B22] text-white px-6 py-2 rounded font-bold hover:bg-green-700 transition shadow-md">ACTIVATE</button>
                     <button className="flex items-center gap-1 text-gray-400 font-bold text-xs uppercase hover:text-blue-600 transition">
