@@ -10,54 +10,42 @@ The application features a sophisticated State-Driven Navigation Mapper, ensurin
 
 ## Advanced Features
 
-
 1. **Intelligent Navigation & Command Palette**
-
-    - Mapper Logic: A centralized component engine that mounts/unmounts views dynamically based on global state.
-
-    - Command Search: A functional Navbar search bar that acts as a command palette—typing "Logs" or "Settings" and pressing Enter instantly routes the user to the target module.
-
-    - Domain-Grouped Sidebar: Organized navigation into Home, Admin, Analysis, and Help domains for enterprise-level usability.
+    - **Mapper Logic:** A centralized component engine that mounts/unmounts views dynamically based on global state.
+    - **Command Search:** A functional Navbar search bar that acts as a command palette—typing "Logs" or "Settings" and pressing Enter instantly routes the user to the target module.
+    - **Domain-Grouped Sidebar:** Organized navigation into Home, Admin, Analysis, and Help domains for enterprise-level usability.
 
 2. **Secure License Activation**
-
-    - Strict Validation: Integrated Regex patterns to enforce alphabet-only names and valid Dynamics 365 environment URLs (https://org.crm.dynamics.com).
-
-    - State-Locked Security: The activation trigger is programmatically locked until all validation criteria are met, preventing corrupt data entries.
+    - **Strict Validation:** Integrated Regex patterns to enforce alphabet-only names and valid Dynamics 365 environment URLs (`https://org.crm.dynamics.com`).
+    - **State-Locked Security:** The activation trigger is programmatically locked until all validation criteria are met, preventing corrupt data entries.
 
 3. **Entity Configuration System**
-
-    - Schema Mapping: A full CRUD interface to manage CRM entities (Accounts, Contacts, Leads, etc.).
-
-    - Live Sync Toggles: Functional switches to enable or disable real-time data flow for specific schemas.
+    - **Schema Mapping:** A full CRUD interface to manage CRM entities (Accounts, Contacts, Leads, etc.).
+    - **Live Sync Toggles:** Functional switches to enable or disable real-time data flow for specific schemas.
 
 4. **Data Persistence & Analytics**
-
-    - LocalStorage Sync: All system logs and configurations are persisted in the browser's local storage, ensuring data survives page refreshes.
-
-    - Live Pulse Monitoring: A dashboard featuring "API Pulse" and "System Load" animations that simulate real-time traffic jitter.
+    - **LocalStorage Sync:** All system logs and configurations are persisted in the browser's local storage, ensuring data survives page refreshes.
+    - **Live Pulse Monitoring:** A dashboard featuring "API Pulse" and "System Load" animations that simulate real-time traffic jitter.
 
 5. **Professional UI/UX**
-
-    - Dynamics Design Language: High-contrast Navy palette (#002050) with optimized glassmorphism effects.
-
-    - Responsive "Card" Rails: The table views automatically transform into structured cards on mobile devices for 100% accessibility.
+    - **Dynamics Design Language:** High-contrast Navy palette (`#002050`) with optimized glassmorphism effects.
+    - **Responsive "Card" Rails:** Table views automatically transform into structured cards on mobile devices for 100% accessibility.
 
 ---
 
 ## Tech Stack
 
-- Framework: React 18 (Functional Components & Hooks)  
-- Styling: Tailwind CSS (Utility-first, responsive design)
-- Icons: Material UI Icons  
-- State Management: React useState & useEffect (Centralized Prop-Drilling Pattern)
-- Build Tool: Vite (Lightning-fast development)
+- **Framework:** React 18 (Functional Components & Hooks)  
+- **Styling:** Tailwind CSS (Utility-first, responsive design)
+- **Icons:** Material UI Icons  
+- **State Management:** React `useState` & `useEffect` (Lifting State Up Pattern)
+- **Build Tool:** Vite (Lightning-fast development)
 
 ---
 
 ## Project Structure
 
-```
+```text
 src/
 ├── assets/             # Brand logos and static media
 ├── components/
@@ -68,7 +56,6 @@ src/
 ├── main.jsx            # Entry point
 └── index.css           # Tailwind & Global styles
 ```
-
 ---
 
 ## Prerequisites
@@ -84,24 +71,27 @@ src/
 
    ```bash
    git clone https://github.com/abdul-rahman-9/Dynamic-365-License-Management.git
+   ```
 
 2. Navigate into the project directory:
 
    ```bash
    cd Dynamic-365-License-Management
+   ```
 
 3. Install dependencies:
 
    ```bash
    npm install
+   ```
 
 4. Launch Environment:
 
-    ```bash
+   ```bash
    npm run dev
+   ```
 
 ---
-
 
 ## Usage Guide
 
